@@ -1,0 +1,81 @@
+@layout('layouts.app')
+
+@section('content')
+<style type="text/css" media="screen">
+</style>
+
+@if(configured)
+    <div class="config">
+        <img src="https://image.flaticon.com/icons/png/512/126/126472.png" alt="" style="width: 20px; height: 20px;">
+        <a href="/configure">Configuration</a>
+    </div>
+    <div class="search__box">search box</div>
+@else
+    <p class="d-flex d-center">No pages configured</p>
+    <a href="/configure" class="d-flex d-center mt-3">Add Pages</a>
+@endif
+
+@endsection
+
+@section('scripts')
+<script>
+
+    $(document).ready(function() {
+       
+        
+
+        $(document).on('click', '.delete_image', function(e) {
+            if (!confirm('Are you sure you want to delete this image ?')) return false;
+            let ele = $(this).closest('#image_delete_modal');
+            let atg = ele.attr('data-atg');
+            let lc = ele.attr('data-lc');
+            let type = ele.attr('data-type');
+
+            $.ajax({
+                type: 'POST',
+                url: '{{base_url}}/api/delete_image',
+                data: {
+                    'atg_code': atg,
+                    'lc_style_code': lc,
+                    'image_type': type
+                },
+                success: function(res) {
+                    res = JSON.parse(res);
+                    if (res.isOk == true) {
+                        $('#image_delete_modal').modal('hide');
+                        let container = $('#warehouse__table a[data-atg="'+atg+'"][data-type="'+type+'"]');
+                        container.wrap('<p>').parent().html('NA');
+                        container.unwrap();
+                    }
+                    else {
+                        alert('Unable to delete image');
+                    }
+                }
+            })
+        })
+
+        $(document).on('change', 'input[type="checkbox"]', function(e) {
+            let status = $(this).prop('checked') ? 'Y': 'N';
+            let id = $(this).attr('data-id');
+
+            $.ajax({
+                type: 'POST',
+                url: '{{base_url}}/api/update_status',
+                data: {
+                    status: status,
+                    id: id
+                },
+                success: function(res) {
+                    res = JSON.parse(res);
+                    if (res.isOk == false) {
+                        alert('Error: Unable to update');
+                    }
+                },
+                error: function(err) {
+                    console.log(err);
+                } 
+            })
+        });
+    });
+</script>   
+@endsection  

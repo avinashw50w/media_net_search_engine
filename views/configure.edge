@@ -1,0 +1,65 @@
+@layout('layouts.app')
+
+@section('content')
+<p class="f-bold f-16">Configuration</p>
+<textarea class="config-box mt-2 " name="" id="url-box" cols="30" rows="10" placeholder="Enter list of urls"></textarea>
+
+<div id="loader" class="d-none">
+    <img src="https://miro.medium.com/max/882/1*9EBHIOzhE1XfMYoKz1JcsQ.gif" alt="" style="width: 400px; height: 300px;">
+    <p class="d-flex d-center">Crawling&nbsp;<span id="curr-url-index"></span>&nbsp;out of &nbsp;<span id="total-urls"></span>...</p>
+</div>
+
+<div class="d-flex mt-5">
+    <a href="#" id="crawl" class="btn mr-2">Start Crawling</a>
+    <a href="/" class="btn btn-dark">back</a>
+</div>
+@endsection
+
+@section('scripts')
+<script>
+    $(document).ready(function() {
+        $("#crawl").click(function(e) {
+            e.preventDefault();
+            let urls = $("#url-box").val();
+
+            if (urls) {
+                urls = urls.split("\\n");
+                crawl(urls);                
+            }
+        });
+
+        function ajaxRequest(urls, index) {
+            if (index < urls.length) {
+                $("#curr-url-index").text(index + 1);
+                $.ajax({
+                    url: 'crawl',
+                    method: 'POST',
+                    data: {
+                        url: urls[index]
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        ajaxRequest(urls, index + 1);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            }
+
+            $("#loader").addClass("d-none");
+            $("#url-box").removeClass("d-none");
+        }
+
+        function crawl(urls = []) {
+            if (urls.length === 0) return;
+            $("#url-box").addClass("d-none");
+            $("#loader").removeClass("d-none");
+            $("#total-urls").text(urls.length);
+
+            ajaxRequest(urls, 0);
+        }
+    });
+</script>
+
+@endsection
