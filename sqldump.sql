@@ -30,12 +30,6 @@ CREATE TABLE `website_titles` (
   FULLTEXT KEY `ft_idx` (`title`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO `website_titles` (`id`, `title`, `url`, `url_hash`, `created_at`, `updated_at`) VALUES
-(1, 'google', 'https://www.google.com/', 'K2gcCiS6/4iZ1xY8x/gFx14fROQ=', '2021-04-22 01:26:37', '2021-04-22 02:52:10'),
-(3, 'googly', 'https://www.google.com/', 'K2gcCiS6/4iZ1xY8x/gRx14fROQ=', '2021-04-22 01:26:37', '2021-04-22 02:37:52'),
-(4, 'Edge - Templating engine with fresh air', 'https://edge.adonisjs.com/docs/getting-started', 'TNzZcwGL0JkMf0f4IQFgzq5fDrU=', '2021-04-22 03:00:10', '2021-04-22 03:00:10'),
-(5, 'MySQL SOUNDS LIKE - w3resource', 'https://www.w3resource.com/mysql/string-functions/mysql-sounds_like-function.php', 'lywayRrkOLdL6LJ7vM8xMLcTdrE=', '2021-04-22 03:00:11', '2021-04-22 03:00:11'),
-(6, 'What is the fastest node.js hashing algorithm | by Chris Thompson | Medium', 'https://medium.com/@chris_72272/what-is-the-fastest-node-js-hashing-algorithm-c15c1a0e164e', '8K9x/1Avj0OxsNX3aKgh3ZToT+4=', '2021-04-22 03:00:12', '2021-04-22 03:00:12');
 
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
