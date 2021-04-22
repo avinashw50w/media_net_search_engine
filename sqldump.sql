@@ -28,7 +28,7 @@ CREATE TABLE `website_titles` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `website_titles_url_hash_idx` (`url_hash`) USING BTREE,
   FULLTEXT KEY `ft_idx` (`title`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
