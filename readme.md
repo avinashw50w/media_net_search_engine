@@ -1,9 +1,13 @@
 # Search Engine
 
+### Minimum requirements
+- nodejs (10 or above)
+- MySQL (5.6 or higher)
+
 ## Steps to run
 
 - Install the latest version of node js from [here](https://nodejs.org/en/)
-- create a DB
+- create a DB in MySQL
 ```sh
 CREATE DATABASE {database_name} DEFAULT CHARSET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```
