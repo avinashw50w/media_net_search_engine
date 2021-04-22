@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 const cheerio = require('cheerio');
 const _ = require('lodash');
 const crypto = require('crypto');
-const matchers = require('./mathers'); 
+const matchers = require('./matchers'); 
 
 function checkIfPagesAdded() {
     return new Promise((resolve, reject) => {
@@ -28,8 +28,16 @@ async function getConfigurationPage(req, res) {
     res.render('configure');
 }
 
-async function crawlWebpage(req, res) {
-    const url = _.get(req, 'body.url', '');
+function isValidURL(url) {
+    if (_.isNull(url)) return false;
+    url = url.trim();
+    return url.match(/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/);
+}
+
+async function crawlWebpage(url) {
+    if (!isValidURL(url)) {
+        throw "Not a valid URL";
+    }
     const response = await fetch(url);
     const html = await response.text();
     const $ = cheerio.load(html);
@@ -40,13 +48,10 @@ async function crawlWebpage(req, res) {
         try {
             await storeUrl({ title, url, url_hash });
         } catch (err) {
-            console.log(err);
+            throw err;
         }
     }
-    return res.json({
-        isOk: true,
-        data: title,
-    })
+    return title;
 }
 
 function storeUrl({ title, url, url_hash }) {
