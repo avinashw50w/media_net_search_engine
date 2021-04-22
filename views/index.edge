@@ -11,7 +11,7 @@
     </div>
 
     <div class="d-flex d-center">
-        <input type="radio" id="fuzzy-radio">&nbsp; Enable fuzzy search(slow)
+        <input type="checkbox" id="fuzzy-checkbox">&nbsp; Enable fuzzy search(slow)
     </div>
     <div class="search-box d-flex d-center mt-2">
         <input type="text" id="search-input">
@@ -48,7 +48,7 @@
             }
        });
 
-       $("#fuzzy-radio").on('change', function(e) {
+       $("#fuzzy-checkbox").on('change', function(e) {
             fuzzyCheck = +($(this).is(':checked'));
        });
 

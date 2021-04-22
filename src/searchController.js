@@ -3,6 +3,7 @@ const cheerio = require('cheerio');
 const _ = require('lodash');
 const crypto = require('crypto');
 const matchers = require('./matchers'); 
+const { stopWords } = require('./constants');
 
 function checkIfPagesAdded() {
     return new Promise((resolve, reject) => {
@@ -91,7 +92,12 @@ function parseQuery(query) {
     return query;
 }
 
+function removeStopWords(str) {
+    return str.split(' ').filter(word => !_.has(stopWords, word)).join(' ');
+}
+
 function buildQueryForFuzzySearch(searchString) {
+    searchString = removeStopWords(searchString);
     let query = [];
 
     _.map(matchers, (matcher, key) => {
