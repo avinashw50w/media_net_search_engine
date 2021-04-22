@@ -63,7 +63,7 @@
 
                     let html = '';
                     for (let d of data.data) {
-                        html += '<li class="mt-1"><a href="' + d.url + '">' + d.title + '</a></li>';
+                        html += '<li class="mt-1"><a target="_blank" href="' + d.url + '">' + d.title + '</a></li>';
                     }
 
                     $("#search-results").html(html);
