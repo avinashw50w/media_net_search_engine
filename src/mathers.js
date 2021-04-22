@@ -1,7 +1,7 @@
 const matchers = {
     exactMatcher: (column, query) => exactMatcher(column, query, 100),
-    timesInStringMatcher: (column, query) => timesInStringMatcher(column, query, 67),
-    startOfStringMatcher: (column, query) => startOfStringMatcher(column, query, 50),
+    startOfStringMatcher: (column, query) => startOfStringMatcher(column, query, 61),
+    timesInStringMatcher: (column, query) => timesInStringMatcher(column, query, 50),
     acronymMatcher: (column, query) => acronymMatcher(column, query, 42),
     consecutiveCharactersMatcher: (column, query) => consecutiveCharactersMatcher(column, query, 40),
     startOfWordsMatcher: (column, query) => startOfWordsMatcher(column, query, 35),

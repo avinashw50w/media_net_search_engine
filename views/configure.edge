@@ -4,6 +4,8 @@
 <p class="f-bold f-16">Configuration</p>
 <textarea class="config-box mt-2 " name="" id="url-box" cols="30" rows="10" placeholder="Enter list of urls"></textarea>
 
+<div id="snackbar">Crawling Completed</div>
+
 <div id="loader" style="width: 450px; height: 300px;" class="d-none">
     <img src="https://miro.medium.com/max/882/1*9EBHIOzhE1XfMYoKz1JcsQ.gif" alt="">
     <p class="d-flex d-center">Crawling&nbsp;<span id="curr-url-index"></span>&nbsp;out of &nbsp;<span id="total-urls"></span>...</p>
@@ -52,7 +54,6 @@
                         url: urls[index]
                     },
                     success: function(data) {
-                        console.log(data);
                         ajaxRequest(urls, index + 1);
                     },
                     error: function(error) {
@@ -70,9 +71,17 @@
 
             ajaxRequest(urls, 0);
 
-            $("#url-box").html('');
             $("#loader").addClass("d-none");
             $("#url-box").removeClass("d-none");
+            $("#url-box").val('');
+            showStatus();
+        }
+
+        function showStatus() {
+            var x = document.getElementById("snackbar");
+            x.className = "show";
+            console.log(x);
+            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
         }
     });
 </script>

@@ -63,7 +63,7 @@ function storeUrl({ title, url, url_hash }) {
 
 function search({ query, fuzzy }) {
     if (!query) return Promise.resolve(true);
-    console.log({query, fuzzy});
+
     if (fuzzy) {
         return fuzzySearch(query);
     }
