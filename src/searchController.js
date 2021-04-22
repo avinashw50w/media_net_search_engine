@@ -122,7 +122,7 @@ function getFuzzySearchResults(rankQuery) {
                 FROM
                     website_titles) x
             WHERE
-                rnk > 20
+                rnk > 10
             ORDER BY
                 rnk DESC;`;
 
